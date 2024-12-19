@@ -142,3 +142,10 @@ Todas las variables deben configurarse en:
    - Gestión de usuarios
    - Invitaciones
    - Operaciones administrativas
+
+### Seguridad
+
++ ⚠️ **IMPORTANTE: Nunca subir las keys de Supabase al repositorio**
++ - Las keys deben configurarse en variables de entorno
++ - Especialmente la `SUPABASE_SERVICE_ROLE_KEY` que da acceso completo
++ - Configurar las keys solo en el panel de Netlify
