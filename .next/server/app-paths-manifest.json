@@ -1,7 +1,7 @@
 {
   "/page": "app/page.js",
-  "/client-access/[token]/page": "app/client-access/[token]/page.js",
   "/users/page": "app/users/page.js",
+  "/client-access/[token]/page": "app/client-access/[token]/page.js",
   "/login/page": "app/login/page.js",
   "/shared-docs/[token]/page": "app/shared-docs/[token]/page.js"
 }

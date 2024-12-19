@@ -83,3 +83,62 @@ FileVault es una plataforma web para la gestión de documentos y expedientes de 
 ### Tablas Principales
 
 #### 1. organizations 
+
+## Deployment
+
+### Netlify Continuous Deployment
+
+El proyecto está configurado con Continuous Deployment en Netlify:
+
+1. **Flujo de Trabajo**
+   - Push a la rama `main` en GitHub
+   - Netlify detecta cambios automáticamente
+   - Se inicia nuevo build y deploy
+   - Sitio se actualiza en producción
+
+2. **Variables de Entorno en Netlify**
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=https://yaqeiebxufbqynbbywiu.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key
+   NEXT_PUBLIC_APP_URL=https://filevault.netlify.app
+   ```
+
+3. **Configuración del Build**
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+   - Node version: 18.x
+
+### Variables de Entorno y Seguridad
+
+#### Claves de Supabase
+El sistema utiliza dos tipos de claves de acceso a Supabase:
+
+1. **Clave Anónima (Frontend)**
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=https://yaqeiebxufbqynbbywiu.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key
+   ```
+   - Usada en el cliente
+   - Permisos limitados por RLS
+   - Segura para exponer en el frontend
+
+2. **Clave de Servicio (Backend)**
+   ```env
+   SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
+   ```
+   - Solo para operaciones del servidor
+   - Acceso completo a la base de datos
+   - Usada en:
+     - API routes (/api/*)
+     - Operaciones administrativas
+     - Gestión de usuarios
+     - Operaciones bypass RLS
+
+#### Configuración en Netlify
+Todas las variables deben configurarse en:
+1. Settings → Environment variables
+2. Incluir tanto las claves públicas como privadas
+3. Asegurarse de que la clave de servicio esté presente para:
+   - Gestión de usuarios
+   - Invitaciones
+   - Operaciones administrativas
